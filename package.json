@@ -1,6 +1,7 @@
 {
   "name": "react-server-example",
-  "version": "1.4.2",
+	"type": "module",
+	"version": "1.4.2",
   "description": "A very simple implementation of server-side React rendering",
   "main": "server.js",
   "repository": "mhart/react-server-example",
@@ -12,12 +13,21 @@
   ],
   "author": "Michael Hart <michael.hart.au@gmail.com>",
   "license": "MIT",
+	"scripts": {
+		"dev": "node prepare.js && nodemon server.js"
+	},
   "dependencies": {
     "browserify": "^16.5.2",
     "create-react-class": "^15.6.3",
     "literalify": "^0.4.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-dom-factories": "^1.0.2"
+    "react-dom-factories": "^1.0.2",
+	  "classnames": "^2.2.6",
+	  "lodash": "^4.17.15",
+	  "node-sass": "^4.13.1",
+	  "react-ga": "^2.7.0",
+	  "react-router-dom": "^5.1.2",
+	  "react-scripts": "^3.4.1"
   }
 }

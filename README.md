@@ -27,9 +27,9 @@ Here are the files involved:
 
 `App.js`:
 ```js
-var createReactClass = require('create-react-class')
-var DOM = require('react-dom-factories')
-var div = DOM.div, button = DOM.button, ul = DOM.ul, li = DOM.li
+import createReactClass from 'create-react-class'
+import DOM from 'react-dom-factories'
+let div = DOM.div, button = DOM.button, ul = DOM.ul, li = DOM.li
 
 // This is just a simple example of a component that can be rendered on both
 // the server and browser
@@ -78,10 +78,10 @@ module.exports = createReactClass({
 
 `browser.js`:
 ```js
-var React = require('react')
-var ReactDOM = require('react-dom')
+import React from 'react'
+import ReactDOM from 'react-dom'
 // This is our React component, shared by server and browser thanks to browserify
-var App = React.createFactory(require('./App'))
+let App = React.createFactory(require('./App'))
 
 // This script will run in the browser and will render our component using the
 // value from APP_PROPS that we generate inline in the page's html on the server.
@@ -93,18 +93,18 @@ ReactDOM.render(App(window.APP_PROPS), document.getElementById('content'))
 
 `server.js`:
 ```js
-var http = require('http')
-var browserify = require('browserify')
-var literalify = require('literalify')
-var React = require('react')
-var ReactDOMServer = require('react-dom/server')
-var DOM = require('react-dom-factories')
-var body = DOM.body, div = DOM.div, script = DOM.script
+import http from 'http'
+import browserify from 'browserify'
+import literalify from 'literalify'
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import DOM from 'react-dom-factories'
+let body = DOM.body, div = DOM.div, script = DOM.script
 // This is our React component, shared by server and browser thanks to browserify
-var App = React.createFactory(require('./App'))
+let App = React.createFactory(require('./App'))
 
 // A variable to store our JS, which we create when /bundle.js is first requested
-var BUNDLE = null
+let BUNDLE = null
 
 // Just create a plain old HTTP server that responds to two endpoints ('/' and
 // '/bundle.js') This would obviously work similarly with any higher level
@@ -124,7 +124,7 @@ http.createServer(function(req, res) {
     // here (with some potentially dangerous values for testing), but you could
     // imagine this would be objects typically fetched async from a DB,
     // filesystem or API, depending on the logged-in user, etc.
-    var props = {
+    let props = {
       items: [
         'Item 0',
         'Item 1',
@@ -136,7 +136,7 @@ http.createServer(function(req, res) {
     // Here we're using React to render the outer body, so we just use the
     // simpler renderToStaticMarkup function, but you could use any templating
     // language (or just a string) for the outer page template
-    var html = ReactDOMServer.renderToStaticMarkup(body(null,
+    let html = ReactDOMServer.renderToStaticMarkup(body(null,
 
       // The actual server-side rendering of our component occurs here, and we
       // pass our data in as `props`. This div is the same one that the client
@@ -148,9 +148,9 @@ http.createServer(function(req, res) {
 
       // The props should match on the client and server, so we stringify them
       // on the page to be available for access by the code run in browser.js
-      // You could use any var name here as long as it's unique
+      // You could use any let name here as long as it's unique
       script({
-        dangerouslySetInnerHTML: {__html: 'var APP_PROPS = ' + safeStringify(props) + ';'},
+        dangerouslySetInnerHTML: {__html: 'let APP_PROPS = ' + safeStringify(props) + ';'},
       }),
 
       // We'll load React from a CDN - you don't have to do this,

@@ -1,15 +1,18 @@
-var http = require('http')
-var browserify = require('browserify')
-var literalify = require('literalify')
-var React = require('react')
-var ReactDOMServer = require('react-dom/server')
-var DOM = require('react-dom-factories')
-var body = DOM.body, div = DOM.div, script = DOM.script
+import http from 'http'
+import browserify from 'browserify'
+import literalify from 'literalify'
+import React from 'react'
+import fs from 'fs'
+import ReactDOMServer from 'react-dom/server.cjs'
+import DOM from 'react-dom-factories'
+let body = DOM.body, div = DOM.div, script = DOM.script
 // This is our React component, shared by server and browser thanks to browserify
-var App = React.createFactory(require('./App'))
+// let App = React.createFactory(import('./App.js'))
+let app_raw = fs.readFileSync('./src/App.js').toString()
+let App = React.createFactory(app_raw)
 
 // A variable to store our JS, which we create when /bundle.js is first requested
-var BUNDLE = null
+let BUNDLE = null
 
 // Just create a plain old HTTP server that responds to two endpoints ('/' and
 // '/bundle.js') This would obviously work similarly with any higher level
@@ -29,19 +32,20 @@ http.createServer(function(req, res) {
     // here (with some potentially dangerous values for testing), but you could
     // imagine this would be objects typically fetched async from a DB,
     // filesystem or API, depending on the logged-in user, etc.
-    var props = {
-      items: [
-        'Item 0',
-        'Item 1',
-        'Item </scRIpt>\u2028',
-        'Item <!--inject!-->\u2029',
-      ],
+    let props = {
+			template: 'insurance1',
+			cover: 'mothers',
+      data: {
+				perMonth: 1000,
+	      years: 10,
+	      interest: 0.05
+      }
     }
 
     // Here we're using React to render the outer body, so we just use the
     // simpler renderToStaticMarkup function, but you could use any templating
     // language (or just a string) for the outer page template
-    var html = ReactDOMServer.renderToStaticMarkup(body(null,
+    let html = ReactDOMServer.renderToStaticMarkup(body(null,
 
       // The actual server-side rendering of our component occurs here, and we
       // pass our data in as `props`. This div is the same one that the client
@@ -53,9 +57,9 @@ http.createServer(function(req, res) {
 
       // The props should match on the client and server, so we stringify them
       // on the page to be available for access by the code run in browser.js
-      // You could use any var name here as long as it's unique
+      // You could use any let name here as long as it's unique
       script({
-        dangerouslySetInnerHTML: {__html: 'var APP_PROPS = ' + safeStringify(props) + ';'},
+        dangerouslySetInnerHTML: {__html: 'let APP_PROPS = ' + safeStringify(props) + ';'},
       }),
 
       // We'll load React from a CDN - you don't have to do this,
@@ -71,6 +75,9 @@ http.createServer(function(req, res) {
       script({src: '/bundle.js'})
     ))
 
+	  console.log('HTML:')
+	  console.log(html)
+	  console.log('HTML:')
     // Return the page to the browser
     res.end(html)
 
@@ -110,9 +117,9 @@ http.createServer(function(req, res) {
   }
 
 // The http server listens on port 3000
-}).listen(3000, function(err) {
+}).listen(4000, function(err) {
   if (err) throw err
-  console.log('Listening on 3000...')
+  console.log('Listening on http://localhost:4000')
 })
 
 

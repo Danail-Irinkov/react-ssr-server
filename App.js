@@ -1,11 +1,11 @@
-var createReactClass = require('create-react-class')
-var DOM = require('react-dom-factories')
-var div = DOM.div, button = DOM.button, ul = DOM.ul, li = DOM.li
+import createReactClass from 'create-react-class'
+import DOM from 'react-dom-factories'
+let div = DOM.div, button = DOM.button, ul = DOM.ul, li = DOM.li
 
 // This is just a simple example of a component that can be rendered on both
 // the server and browser
 
-module.exports = createReactClass({
+export default createReactClass({
 
   // We initialise its state by using the `props` that were passed in when it
   // was first rendered. We also want the button to be disabled until the
