@@ -1,0 +1,41 @@
+.split-wrap {
+	margin-top: -($split-item--padding-v__mobile / 2);
+
+	&:last-of-type {
+		margin-bottom: -($split-item--padding-v__mobile / 2);
+	}
+
+    &:not(:last-of-type) {
+        margin-bottom: $split-item--padding-v__mobile / 2;
+    }
+
+	.split-item {
+		padding-top: $split-item--padding-v__mobile / 2;
+		padding-bottom: $split-item--padding-v__mobile / 2;
+		display: flex;
+		flex-direction: column;
+
+		.split-item-image {
+			position: relative;
+			width: 100%;
+
+			img,
+			svg,
+			video {
+				width: auto;
+				height: auto;
+				max-width: 100%;
+				overflow: visible;
+			}
+
+			&.split-item-image-fill {
+
+				img,
+				svg,
+				video {
+					width: 100%;
+				}
+			}
+		}
+	}
+}

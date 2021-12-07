@@ -1,0 +1,5 @@
+body {
+	background: #8a5252; /* Fallback for when there is no custom background color defined. */
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,10 @@
+.section-inner {
+    position: relative; // To always display inner elements above pseudo decorative stuff
+    padding-top: $section--padding__mobile;
+    padding-bottom: $section--padding__mobile;
+}
+
+.section-header {
+	padding-bottom: $section-header--padding__mobile;
+}
+

@@ -1,0 +1,9 @@
+{
+	"presets": ["@babel/preset-env", "@babel/preset-react"],
+	"plugins": ["@babel/plugin-proposal-class-properties",
+		"babel-plugin-styled-components",
+		"babel-plugin-transform-scss",
+		["transform-import-css", {
+			"generateScopedName": "lib-[name]-[local]-[hash:base64:4]"
+		}]]
+}

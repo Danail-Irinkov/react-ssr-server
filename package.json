@@ -1,7 +1,6 @@
 {
-  "name": "react-server-example",
-	"type": "module",
-	"version": "1.4.2",
+  "name": "react-ssr-bundle",
+  "version": "1.4.2",
   "description": "A very simple implementation of server-side React rendering",
   "main": "server.js",
   "repository": "mhart/react-server-example",
@@ -11,23 +10,38 @@
     "server",
     "server-side"
   ],
-  "author": "Michael Hart <michael.hart.au@gmail.com>",
+  "author": "Dan Irinkov <dan@ezlaunder.com>",
   "license": "MIT",
-	"scripts": {
-		"dev": "node prepare.js && nodemon server.js"
-	},
+  "scripts": {
+    "dev": "nodemon --exec babel-node server.js"
+  },
   "dependencies": {
     "browserify": "^16.5.2",
+    "classnames": "^2.2.6",
     "create-react-class": "^15.6.3",
     "literalify": "^0.4.0",
+    "lodash": "^4.17.15",
+    "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-dom-factories": "^1.0.2",
-	  "classnames": "^2.2.6",
-	  "lodash": "^4.17.15",
-	  "node-sass": "^4.13.1",
-	  "react-ga": "^2.7.0",
-	  "react-router-dom": "^5.1.2",
-	  "react-scripts": "^3.4.1"
+    "react-ga": "^2.7.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1"
+  },
+  "devDependencies": {
+	  "babel-plugin-styled-components": "^2.0.2",
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.16.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.0",
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.16.0",
+    "@babel/register": "^7.16.0",
+    "babel-plugin-transform-scss": "^1.1.0",
+    "babel-plugin-transform-import-css": "^1.0.0-alpha.11"
   }
 }
